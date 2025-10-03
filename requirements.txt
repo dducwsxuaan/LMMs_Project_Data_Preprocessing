@@ -1,0 +1,8 @@
+# For conda installation, use these commands instead:
+# conda install -c conda-forge pymupdf pandas
+# pip install camelot-py[cv]
+
+# For pip installation:
+pymupdf>=1.23.0
+camelot-py[cv]
+pandas>=1.5.0
