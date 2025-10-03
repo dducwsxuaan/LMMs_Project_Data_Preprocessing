@@ -8,8 +8,6 @@
 data/raw/
 
 # Extracted images folder
-data/extracted_images/
-
 # Python cache and environment
 __pycache__/
 *.pyc
