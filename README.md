@@ -7,7 +7,7 @@
 git clone 
 ``` 
 
-### Step 2: Upload your raw data (pdf files) to the folder `/data/raw/`. This is just for testing the processing stage, so you just need to upload some files
+### Step 2: Create `/raw/` inside `/data/` and upload your raw data (pdf files) to the folder `/data/raw/`. This is just for testing the processing stage, so you just need to upload some files
 
 ### Step 3: Run the file `/scripts/pdf_file_renaming.py` so that names of all pdf files are changed to the same format
 ```sh
