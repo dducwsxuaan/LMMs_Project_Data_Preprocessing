@@ -40,7 +40,7 @@ for pdf_file in sorted(os.listdir(raw_folder)):
 
             # Final filename: prefix + case.image.ext
             # Example: case1_1.1.jpg, case2_2.1.jpg
-            image_name = f"{pdf_name}_{case_number}.{image_counter}.{image_ext}"
+            image_name = f"Fig_{case_number}.{image_counter}.{image_ext}"
             image_path = os.path.join(output_folder, image_name)
 
             with open(image_path, "wb") as img_file:

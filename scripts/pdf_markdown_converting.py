@@ -43,6 +43,9 @@ def split_sections(text: str) -> dict:
         else:
             sections[current_header] += clean + " "
 
+    # The caller will attach figure captions (extracted before replacements).
+    sections["Figure Captions"] = ""
+    
     # Final cleanup
     for key in sections:
         sections[key] = sections[key].strip()
@@ -91,12 +94,30 @@ for idx, pdf_file in enumerate(sorted(os.listdir(raw_folder)), start=1):
     # Step 1: Add Case header
     full_text = build_case_header(full_text, idx)
 
+    # Extract figure captions BEFORE replacing figures into markdown links.
+    # Use the user's tested regex exactly as requested.
+    # Capture bullets beginning with '• Fig. X.Y' but stop at the first
+    # sentence-ending period so we extract only the first sentence of the caption.
+    # The sentence-ending period is defined as a '.' followed by whitespace +
+    # an uppercase letter or digit, a newline, or end-of-string. This avoids
+    # stopping on periods inside filenames like '.jpeg'.
+    # Capture the first sentence but include any immediate closing
+    # parentheses, brackets or quotes following the final period so we
+    # don't lose a trailing ')' that belongs to the sentence.
+    pattern = re.compile(
+        r"(•\s*Fig\.\s*\d+\.\d+.*?\.(?:[)\]\"]*)?)(?=(?:\s+[A-Z0-9]|\n|$))",
+        re.DOTALL,
+    )
+    figure_captions = [c.replace("\n", " ").strip() for c in pattern.findall(full_text)]
+    
     # Step 2: Replace figures with links
     replacer = make_fig_replacer(pdf_name)
     markdown_text = re.sub(r"Figs?\. *(\d+\.\d+(?: *[,and]* *\d+\.\d+)*)", replacer, full_text)
 
     # Step 3: Split into sections
     sections = split_sections(markdown_text)
+    # Attach the pre-extracted figure captions
+    sections["Figure Captions"] = "\n".join(figure_captions)
 
     # Step 4: Assemble Markdown output
     md_lines = []

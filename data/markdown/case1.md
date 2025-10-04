@@ -189,3 +189,8 @@ Lancet 2018;391(10121):700–8.
 3
 CHAPTER 1
 A 20-Year-Old Woman from Sudan With Fever, Haemorrhage and Shock
+
+## Figure Captions
+
+• Fig. 1.1 Oral bleeding in Ebola virus disease. (Bausch, D.G., 2008.
+• Fig. 1.2 Rectal bleeding in Ebola virus disease. (Bausch, D.G., 2008.
